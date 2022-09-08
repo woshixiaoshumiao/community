@@ -1,22 +1,20 @@
 package com.zty.community.controller;
 
-import com.zty.community.controller.model.User;
 import com.zty.community.dto.AccessTokenDTO;
 import com.zty.community.dto.GitHubUserDTO;
 import com.zty.community.mapper.UserMapper;
+import com.zty.community.model.User;
 import com.zty.community.provider.GithubProvider;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -44,7 +42,8 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callBack(@RequestParam(name="code") String code,
                            @RequestParam(name="state") String state,
-                           HttpServletRequest request){
+                           HttpServletRequest request,
+                           HttpServletResponse response){
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
@@ -60,13 +59,12 @@ public class AuthorizeController {
             User user = new User();
             user.setAccountId(String.valueOf(gitHubUser.getId()));
             user.setName(gitHubUser.getName());
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
-            userMapper.inserUser(user);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("user", gitHubUser);
+            userMapper.insertUser(user);
+            response.addCookie(new Cookie("token", token));
             return "redirect:/";
         }else{
             //登陆失败，重新登录
