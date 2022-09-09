@@ -3,7 +3,7 @@ package com.zty.community.model;
 /**
  * @BelongsProject: community
  * @BelongsPackage: com.zty.community.model
- * @Author: yanhongwei
+ * @Author: zhangty
  * @CreateTime: 2022-09-07  16:00
  * @Description: TODO
  * @Version: 1.0
