@@ -3,7 +3,7 @@ package com.zty.community.dto;
 /**
  * @BelongsProject: community
  * @BelongsPackage: com.zty.community.dto
- * @Author: yanhongwei
+ * @Author: zhangty
  * @CreateTime: 2022-09-05  21:53
  * @Description: TODO
  * @Version: 1.0

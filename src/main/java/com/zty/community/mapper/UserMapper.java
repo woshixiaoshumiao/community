@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 /**
  * @BelongsProject: community
  * @BelongsPackage: com.zty.community.mapper
- * @Author: yanhongwei
+ * @Author: zhangty
  * @CreateTime: 2022-09-07  15:57
  * @Description: TODO
  * @Version: 1.0

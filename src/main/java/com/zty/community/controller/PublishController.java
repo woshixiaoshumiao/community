@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 /**
  * @BelongsProject: community
  * @BelongsPackage: com.zty.community.controller
- * @Author: yanhongwei
- * @CreateTime: 2022-09-08  22:20
+ * @Author: zhangty
+ * @CreateTime: 2022-09-09  13:46
  * @Description: TODO
  * @Version: 1.0
  */
@@ -15,6 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PublishController {
     @GetMapping("/publish")
     public String publish(){
-        return "publish";
+        return  "publish";
     }
 }
