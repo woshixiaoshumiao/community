@@ -1,7 +1,16 @@
 package com.zty.community.controller;
 
+import com.zty.community.mapper.QuestionMapper;
+import com.zty.community.model.Question;
+import com.zty.community.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @BelongsProject: community
@@ -13,8 +22,34 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class PublishController {
+    @Autowired
+    QuestionMapper questionMapper;
     @GetMapping("/publish")
     public String publish(){
-        return  "publish";
+        return "publish";
+    }
+    @PostMapping("/publish")
+    public String doPublish(
+            @RequestParam("title") String title,
+            @RequestParam("description") String description,
+            @RequestParam("tag") String tag,
+            HttpSession session,
+            Model model
+    ) {
+        Question question = new Question();
+        if (session.getAttribute("user") == null) {
+            model.addAttribute("error", "用户未登录");
+            return "publish";
+        } else {
+            User user = (User) session.getAttribute("user");
+            question.setTitle(title);
+            question.setDescription(description);
+            question.setTag(tag);
+            question.setCreator(user.getId());
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.insertQuestion(question);
+        }
+        return "redirect:/";
     }
 }
