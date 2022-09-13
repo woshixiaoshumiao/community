@@ -41,6 +41,23 @@ public class PublishController {
             model.addAttribute("error", "用户未登录");
             return "publish";
         } else {
+            //校验输入信息
+            model.addAttribute("title", title);
+            model.addAttribute("description", description);
+            model.addAttribute("tag", tag);
+
+            if(title == null || "".equals(title)){
+                model.addAttribute("error", "标题不能为空");
+                return "publish";
+            }
+            if(description == null || "".equals(description)){
+                model.addAttribute("error", "问题描述不能为空");
+                return "publish";
+            }
+            if(tag == null || "".equals(tag)){
+                model.addAttribute("error", "标签不能为空");
+                return "publish";
+            }
             User user = (User) session.getAttribute("user");
             question.setTitle(title);
             question.setDescription(description);
