@@ -16,6 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface QuestionMapper {
     @Insert("INSERT INTO question(title,description, creator,gmt_create,gmt_modified,comment_count,view_count,like_count,tag)\n" +
             "VALUES" +
-            "(#{title},#{description}>,#{creator},#{gmtCreate},#{gmtModified},#{commentCount},#{viewCount},#{likeCount},#{tag})")
+            "(#{title},#{description},#{creator},#{gmtCreate},#{gmtModified},#{commentCount},#{viewCount},#{likeCount},#{tag})")
     public Integer insertQuestion(Question question);
 }
