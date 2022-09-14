@@ -3,6 +3,7 @@ package com.zty.community.mapper;
 import com.zty.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public interface QuestionMapper {
             "(#{title},#{description},#{creator},#{gmtCreate},#{gmtModified},#{commentCount},#{viewCount},#{likeCount},#{tag})")
     public Integer insertQuestion(Question question);
 
-    @Select("select * from question")
-    public List<Question> list();
+    @Select("select * from question limit #{offset}, #{size}")
+    public List<Question> list(@Param("offset") Integer offset, @Param("size") Integer size);
+
+    @Select("select count(1) from question")
+    public Integer countAll();
 }

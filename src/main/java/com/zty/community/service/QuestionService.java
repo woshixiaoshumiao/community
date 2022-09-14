@@ -27,16 +27,18 @@ public class QuestionService {
     @Autowired
     UserMapper userMapper;
 
-    public List<QuestionDTO> list(){
-        List<Question> questions = questionMapper.list();
+    public List<QuestionDTO> list(Integer page, Integer size) {
+        Integer offset = size * (page - 1);
+        List<Question> questions = questionMapper.list(offset, size);
         ArrayList<QuestionDTO> questionDTOList = new ArrayList<>();
-        for (Question question:questions) {
+        for (Question question : questions) {
             User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
+
         return questionDTOList;
     }
 }
