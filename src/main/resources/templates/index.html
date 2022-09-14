@@ -53,16 +53,18 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 " style="background-color: white">
       <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 发现</h2>
-      <div class="media">
+      <div class="media" th:each="question:${questions}">
         <div class="media-left">
           <a href="#">
-            <img class="media-object img-rounded media-object" src="https://avatars.githubusercontent.com/u/42102244?v=4">
+            <img class="media-object img-rounded media-object" th:src="${question.user.avatarUrl}">
           </a>
         </div>
         <div class="media-body">
-          <h4 class="media-heading">如何快速入门SpringBoot开发</h4>
-          点击进入看 小匠视频<br>
-          <span class="text-modify">0 个评论 • 25 次浏览 • 4 <小时前></小时前></span>
+          <h4 class="media-heading" th:text="${question.title}"></h4>
+          <span th:text="${question.description}"></span><br>
+          <span class="text-modify">
+            <span th:text="${question.commentCount}"></span> 个评论 • <span th:text="${question.viewCount}"></span> 次浏览 • <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
+          </span>
         </div>
       </div>
     </div>

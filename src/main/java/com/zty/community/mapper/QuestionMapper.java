@@ -3,6 +3,9 @@ package com.zty.community.mapper;
 import com.zty.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @BelongsProject: community
@@ -18,4 +21,7 @@ public interface QuestionMapper {
             "VALUES" +
             "(#{title},#{description},#{creator},#{gmtCreate},#{gmtModified},#{commentCount},#{viewCount},#{likeCount},#{tag})")
     public Integer insertQuestion(Question question);
+
+    @Select("select * from question")
+    public List<Question> list();
 }
