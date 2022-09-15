@@ -53,7 +53,7 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 " style="background-color: white">
       <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 发现</h2>
-      <div class="media" th:each="question:${questions}">
+      <div class="media" th:each="question:${paginationDTO.getQuestions()}">
         <div class="media-left">
           <a href="#">
             <img class="media-object img-rounded media-object" th:src="${question.user.avatarUrl}">
@@ -70,15 +70,12 @@
       <nav aria-label="Page navigation">
         <ul class="pagination">
           <li>
-            <a href="#" aria-label="Previous">
+            <a href="/" th:href="@{/(page=1)}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
+
+          <li th:each="curpage:${paginationDTO.getPages()}"><a href="/" th:href="@{/(page=${curpage})}" th:text="${curpage}"></a></li>
           <li>
             <a href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>

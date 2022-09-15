@@ -16,6 +16,8 @@ import java.util.List;
 public class PaginationDTO {
     List<QuestionDTO> questions;
     List<Integer> pages;
+    Integer curPage;
+    Integer totalPages;
     Boolean showTurnFront;
     Boolean showTurnLast;
     Boolean showPreviewKey;
