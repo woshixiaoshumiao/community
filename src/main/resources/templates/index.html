@@ -46,7 +46,7 @@
                         </a>
                     </li>
 
-                    <li th:each="curpage:${paginationDTO.getPages()}"><a href="/" th:href="@{/(page=${curpage})}"
+                    <li th:each="curpage:${paginationDTO.getPages()}" th:class="(${curpage}==${paginationDTO.getCurPage()})?'active':''"><a href="/" th:href="@{/(page=${curpage})}"
                                                                          th:text="${curpage}"></a></li>
                     <li>
                         <a href="/" th:href="@{/(page=${paginationDTO.getCurPage()}+1)}" aria-label="Next">

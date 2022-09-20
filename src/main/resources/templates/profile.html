@@ -14,11 +14,11 @@
 </head>
 <body>
 <div th:insert="~{navigation::nav}"></div>
-<div class="container-fluid main" style="background-color: white">
+<div class="container-fluid main profile" style="background-color: white">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 " style="background-color: white">
             <h2><span th:text="${sectionName}"></span></h2>
-            <!-- <div class="media" th:each="question:${paginationDTO.getQuestions()}">
+             <div class="media" th:each="question:${paginationDTO.getQuestions()}">
                  <div class="media-left">
                      <a href="#">
                          <img class="media-object img-rounded media-object" th:src="${question.user.avatarUrl}">
@@ -32,44 +32,45 @@
                              th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
            </span>
                  </div>
-             </div>-->
-            <!--<nav aria-label="Page navigation">
+             </div>
+            <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li>
-                        <a href="/" th:href="@{/(page=1)}" aria-label="Front">
+                        <a href="/" th:href="@{'/profile/'+${section}(page=1)}" aria-label="Front">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/" th:href="@{/(page=${paginationDTO.getCurPage()}-1)}" aria-label="Preview">
+                        <a href="/" th:href="@{'/profile/'+${section}(page=${paginationDTO.getCurPage()}-1)}" aria-label="Preview">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
-                    <li th:each="curpage:${paginationDTO.getPages()}"><a href="/" th:href="@{/(page=${curpage})}"
+                    <li th:each="curpage:${paginationDTO.getPages()}"><a href="/" th:href="@{'/profile/'+${section}(page=${curpage})}"
                                                                          th:text="${curpage}"></a></li>
                     <li>
-                        <a href="/" th:href="@{/(page=${paginationDTO.getCurPage()}+1)}" aria-label="Next">
+                        <a href="/" th:href="@{'/profile/'+${section}(page=${paginationDTO.getCurPage()}+1)}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/" th:href="@{/(page=${paginationDTO.getTotalPages()})}" aria-label="Backen">
+                        <a href="/" th:href="@{'/profile/'+${section}(page=${paginationDTO.getTotalPages()})}" aria-label="Backen">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
                 </ul>
-            </nav>-->
+            </nav>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" style="background-color: white">
-            <div class="list-group">
-                <a href="/profile/question" th:class="${sectionName}=='myQuestion'?'active list-group-item':'list-group-item'"
-                   class="list-group-item">我的问题</a>
-                <a href="#" class="list-group-item">最新回复 <span class="badge">14</span></a>
+            <div class="list-group section">
+                <a href="/profile/questions" th:class="${section}=='questions'?'active list-group-item':'list-group-item'">我的问题</a>
+                <a href="/profile/replies" th:class="${section}=='replies'?'active list-group-item':'list-group-item'">最新回复 <span class="badge">14</span></a>
             </div>
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>

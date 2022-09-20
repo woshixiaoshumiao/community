@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @BelongsProject: community
@@ -34,6 +35,39 @@ public class QuestionService {
         for (Question question : questions) {
             User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
+            if(Objects.isNull(question.getCommentCount())){
+                question.setCommentCount(0);
+            }
+            if(Objects.isNull(question.getLikeCount())){
+                question.setLikeCount(0);
+            }
+            if(Objects.isNull(question.getViewCount())){
+                question.setViewCount(0);
+            }
+            BeanUtils.copyProperties(question, questionDTO);
+            questionDTO.setUser(user);
+            questionDTOList.add(questionDTO);
+        }
+
+        return questionDTOList;
+    }
+
+    public List<QuestionDTO> listByUserId(Integer userId, Integer page, Integer size) {
+        Integer offset = size * (page - 1);
+        List<Question> questions = questionMapper.listByUserId(userId, offset, size);
+        ArrayList<QuestionDTO> questionDTOList = new ArrayList<>();
+        for (Question question : questions) {
+            User user = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            if(Objects.isNull(question.getCommentCount())){
+                question.setCommentCount(0);
+            }
+            if(Objects.isNull(question.getLikeCount())){
+                question.setLikeCount(0);
+            }
+            if(Objects.isNull(question.getViewCount())){
+                question.setViewCount(0);
+            }
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
