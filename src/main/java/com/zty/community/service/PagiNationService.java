@@ -91,6 +91,7 @@ public class PagiNationService {
         if (size <= 0) {
             size = 5;
         }
+
         if(Objects.equals(userId, -1)){
             questions = questionService.list(page, size);
         }else{
@@ -101,12 +102,6 @@ public class PagiNationService {
         PageInfoDTO pageInfoDTO = getPageInfo(page, size, totalQuestionNum);
 
         BeanUtils.copyProperties(pageInfoDTO, paginationDTO);
-//        paginationDTO.setPages(pageInfoDTO.getPages());
-//        paginationDTO.setTotalPages(pageInfoDTO.getTotalPages());
-//        paginationDTO.setShowNextKey(pageInfoDTO.getShowNextKey());
-//        paginationDTO.setShowPreviewKey(pageInfoDTO.getShowPreviewKey());
-//        paginationDTO.setShowTurnFront(pageInfoDTO.getShowTurnFront());
-//        paginationDTO.setShowTurnLast(pageInfoDTO.getShowTurnLast());
         paginationDTO.setCurPage(page);
         paginationDTO.setQuestions(questions);
         return paginationDTO;
