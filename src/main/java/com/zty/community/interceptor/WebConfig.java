@@ -16,12 +16,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 
 @Configuration
+//@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     SessionInterceptor sessionInterceptor;
     @Override
 
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(sessionInterceptor).addPathPatterns("/publish**", "/navigation**", "/profile**");
+        registry.addInterceptor(sessionInterceptor).addPathPatterns("/navigation**", "/profile**");
     }
 }

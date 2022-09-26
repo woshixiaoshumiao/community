@@ -83,12 +83,16 @@ public class PagiNationService {
         }
         //若page参数和size参数不合法，将其合法化，再按照页码查询问题
         Integer pageNums = (totalQuestionNum + size - 1) / size;
-        if (page <= 0) {
+        if (page.compareTo(0) <= 0) {
             page = 1;
-        } else if (page > pageNums) {
-            page = pageNums;
+        } else if (page.compareTo(pageNums) == 1) {
+            if(pageNums.compareTo(0) == 0){
+                page = 1;
+            }else{
+                page = pageNums;
+            }
         }
-        if (size <= 0) {
+        if (size.compareTo(0) <= 0) {
             size = 5;
         }
 
