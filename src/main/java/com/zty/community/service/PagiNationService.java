@@ -96,7 +96,7 @@ public class PagiNationService {
             size = 5;
         }
 
-        if(Objects.equals(userId, -1)){
+        if(userId.equals(-1)){
             questions = questionService.list(page, size);
         }else{
             //按照用户ID获取问题数量

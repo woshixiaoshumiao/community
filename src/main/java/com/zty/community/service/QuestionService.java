@@ -75,4 +75,22 @@ public class QuestionService {
 
         return questionDTOList;
     }
+    public QuestionDTO getQuestionDetailById(Integer id){
+        Question question = questionMapper.getQuestionById(id);
+        Integer userId = question.getCreator();
+        User user = userMapper.findById(userId);
+        QuestionDTO questionDTO = new QuestionDTO();
+        if(Objects.isNull(question.getCommentCount())){
+            question.setCommentCount(0);
+        }
+        if(Objects.isNull(question.getLikeCount())){
+            question.setLikeCount(0);
+        }
+        if(Objects.isNull(question.getViewCount())){
+            question.setViewCount(0);
+        }
+        BeanUtils.copyProperties(question, questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
 }

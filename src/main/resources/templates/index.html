@@ -20,17 +20,20 @@
             <h2><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> 发现</h2>
             <div class="media" th:each="question:${paginationDTO.getQuestions()}">
                 <div class="media-left">
-                    <a href="#">
+                    <a href="">
                         <img class="media-object img-rounded media-object" th:src="${question.user.avatarUrl}">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <a href="/" th:href="@{/question/{questionId}(questionId=${question.getId()})}">
+                        <h4 class="media-heading" th:text="${question.title}"></h4>
+                    </a>
                     <span th:text="${question.description}"></span><br>
                     <span class="text-modify">
-            <span th:text="${question.commentCount}"></span> 个评论 • <span th:text="${question.viewCount}"></span> 次浏览 • <span
+                        <span th:text="${question.commentCount}"></span> 个评论 • <span
+                            th:text="${question.viewCount}"></span> 次浏览 • <span
                             th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
-          </span>
+                    </span>
                 </div>
             </div>
             <nav aria-label="Page navigation">
@@ -46,8 +49,11 @@
                         </a>
                     </li>
 
-                    <li th:each="curpage:${paginationDTO.getPages()}" th:class="(${curpage}==${paginationDTO.getCurPage()})?'active':''"><a href="/" th:href="@{/(page=${curpage})}"
-                                                                         th:text="${curpage}"></a></li>
+                    <li th:each="curpage:${paginationDTO.getPages()}"
+                        th:class="(${curpage}==${paginationDTO.getCurPage()})?'active':''"><a href="/"
+                                                                                              th:href="@{/(page=${curpage})}"
+                                                                                              th:text="${curpage}"></a>
+                    </li>
                     <li>
                         <a href="/" th:href="@{/(page=${paginationDTO.getCurPage()}+1)}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
