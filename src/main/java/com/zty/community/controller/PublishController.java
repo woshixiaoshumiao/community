@@ -51,6 +51,7 @@ public class PublishController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("tag") String tag,
+            @RequestParam(name = "questionId", required = false) Integer questionId,
             HttpSession session,
             Model model
     ) {
@@ -63,6 +64,7 @@ public class PublishController {
             model.addAttribute("title", title);
             model.addAttribute("description", description);
             model.addAttribute("tag", tag);
+            model.addAttribute("questionId", questionId);
             if(title == null || "".equals(title)){
                 model.addAttribute("error", "标题不能为空");
                 return "publish";
@@ -80,7 +82,6 @@ public class PublishController {
             question.setDescription(description);
             question.setTag(tag);
             question.setCreator(user.getId());
-            Integer questionId = (Integer)model.getAttribute("questionId");
             question.setId(questionId);
             questionService.createOrUpdate(question);
         }
