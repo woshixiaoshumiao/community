@@ -5,6 +5,7 @@ import com.zty.community.dto.GitHubUserDTO;
 import com.zty.community.mapper.UserMapper;
 import com.zty.community.model.User;
 import com.zty.community.provider.GithubProvider;
+import com.zty.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,7 @@ public class AuthorizeController {
     @Autowired
     GithubProvider githubProvider;
     @Autowired
-    UserMapper userMapper;
-
+    UserService userService;
     @Value("${github.client.id}")
     private String clientId;
     @Value("${github.client.secret}")
@@ -54,16 +54,9 @@ public class AuthorizeController {
         if(gitHubUser != null){
             //登录成功，写cookies和session
             User user = new User();
-            user.setAccountId(Integer.valueOf(gitHubUser.getId()));
-            user.setName(gitHubUser.getName());
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
-            user.setAvatarUrl(gitHubUser.getAvatarUrl());
-            if(userMapper.findById(Integer.valueOf(gitHubUser.getId())) == null){
-                userMapper.insertUser(user);
-            }
+            user = userService.createOrUpdateUser(gitHubUser, user);
             response.addCookie(new Cookie("token", token));
             request.getSession().setAttribute("user", user);
             return "redirect:/";

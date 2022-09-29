@@ -1,15 +1,19 @@
 package com.zty.community.controller;
 
+import com.zty.community.dto.QuestionDTO;
 import com.zty.community.mapper.QuestionMapper;
 import com.zty.community.model.Question;
 import com.zty.community.model.User;
+import com.zty.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -24,8 +28,22 @@ import javax.servlet.http.HttpSession;
 public class PublishController {
     @Autowired
     QuestionMapper questionMapper;
+    @Autowired
+    QuestionService questionService;
+
     @GetMapping("/publish")
     public String publish(){
+        return "publish";
+    }
+    @GetMapping("/publish/{questionId}")
+    public String edit(@PathVariable("questionId") Integer id,
+                       Model model){
+        QuestionDTO questionDTO = questionService.getQuestionDetailById(id);
+        model.addAttribute("title", questionDTO.getTitle());
+        model.addAttribute("description", questionDTO.getDescription());
+        model.addAttribute("tag", questionDTO.getTag());
+        //加入问题id信息
+        model.addAttribute("questionId", id);
         return "publish";
     }
     @PostMapping("/publish")
@@ -45,7 +63,6 @@ public class PublishController {
             model.addAttribute("title", title);
             model.addAttribute("description", description);
             model.addAttribute("tag", tag);
-
             if(title == null || "".equals(title)){
                 model.addAttribute("error", "标题不能为空");
                 return "publish";
@@ -63,9 +80,9 @@ public class PublishController {
             question.setDescription(description);
             question.setTag(tag);
             question.setCreator(user.getId());
-            question.setGmtCreate(System.currentTimeMillis());
-            question.setGmtModified(question.getGmtCreate());
-            questionMapper.insertQuestion(question);
+            Integer questionId = (Integer)model.getAttribute("questionId");
+            question.setId(questionId);
+            questionService.createOrUpdate(question);
         }
         return "redirect:/";
     }

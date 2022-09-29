@@ -1,10 +1,7 @@
 package com.zty.community.mapper;
 
 import com.zty.community.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 /**
  * @BelongsProject: community
@@ -24,4 +21,7 @@ public interface UserMapper {
     User findByToken(@Param("token") String token);
     @Select("select * from user where account_id = #{id}")
     User findById(@Param("id") Integer id);
+
+    @Update("update user set name=#{name}, avatar_url=#{avatarUrl}, token=#{token}, gmt_modified=#{gmtModified} where account_id=#{accountId}")
+    void updateUser(@Param("accountId") Integer accountId, @Param("name") String name,@Param("avatarUrl") String avatarUrl,@Param("token") String token,@Param("gmtModified") Long gmtModified);
 }
