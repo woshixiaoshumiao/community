@@ -2,7 +2,6 @@ package com.zty.community.controller;
 
 import com.zty.community.dto.AccessTokenDTO;
 import com.zty.community.dto.GitHubUserDTO;
-import com.zty.community.mapper.UserMapper;
 import com.zty.community.model.User;
 import com.zty.community.provider.GithubProvider;
 import com.zty.community.service.UserService;

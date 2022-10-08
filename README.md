@@ -17,4 +17,9 @@
 
 ## 工具
 [Git](https://git-scm.com/download_)
+
 [画图工具](https://www.visual-paradigm.com/cn/download/community.jsp?platform=windows&arch=64bit)
+
+[mybatis generator]()
+
+mvn -D mybatis.generator.overwrite=true mybatis-generator:generate

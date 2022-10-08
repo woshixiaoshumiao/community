@@ -40,7 +40,7 @@ public class ProfileController {
         if ("questions".equals(action)) {
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "我的提问");
-            PaginationDTO paginationDTO = pagiNationService.getPaginationDTO(Integer.valueOf(user.getAccountId()), page, size);
+            PaginationDTO paginationDTO = pagiNationService.getPaginationDTO(user.getAccountId(), page, size);
             model.addAttribute("paginationDTO", paginationDTO);
         } else if ("replies".equals(action)) {
             model.addAttribute("section", "replies");

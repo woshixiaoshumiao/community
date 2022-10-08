@@ -1,8 +1,6 @@
 package com.zty.community.controller;
 
 import com.zty.community.dto.PaginationDTO;
-import com.zty.community.mapper.QuestionMapper;
-import com.zty.community.mapper.UserMapper;
 import com.zty.community.service.PagiNationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 
 public class IndexController {
-    @Autowired
-    UserMapper userMapper;
-    @Autowired
-    QuestionMapper questionMapper;
     @Autowired
     PagiNationService pagiNationService;
 

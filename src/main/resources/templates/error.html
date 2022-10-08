@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ZTY社区</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+
+    <script src="/js/jquery-3.6.1.min.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
+</head>
+<body>
+<div th:insert="~{navigation::nav}"></div>
+<div class="container-fluid main" style="background-color: white">
+    <div class="jumbotron">
+        <h2>哎呀，访问出错了！！！</h2>
+        <p th:text="${message}">服务太热了，要不等下再来~</p>
+        <p><a class="btn btn-primary btn-lg" href="/" role="button">点击返回首页</a></p>
+    </div>
+</div>
+
+</body>
+</html>

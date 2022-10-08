@@ -3,11 +3,11 @@ package com.zty.community.service;
 import com.zty.community.dto.GitHubUserDTO;
 import com.zty.community.mapper.UserMapper;
 import com.zty.community.model.User;
+import com.zty.community.model.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
-import java.util.UUID;
+import java.util.List;
 
 /**
  * @BelongsProject: community
@@ -28,14 +28,20 @@ public class UserService {
         user.setName(gitHubUser.getName());
         user.setAvatarUrl(gitHubUser.getAvatarUrl());
         user.setGmtModified(System.currentTimeMillis());
-        if(userMapper.findById(Integer.valueOf(gitHubUser.getId())) == null){
+        UserExample userExample = new UserExample();
+        Integer accountId = Integer.valueOf(gitHubUser.getId());
+        userExample.createCriteria().andAccountIdEqualTo(accountId);
+        List<User> users = userMapper.selectByExample(userExample);
+        if(users.isEmpty()){
             //无该用户,进行用户插入操作
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
-            userMapper.insertUser(user);
+            userMapper.insert(user);
         }else{
             //有该用户，只需要更新该用户信息
-            userMapper.updateUser(user.getAccountId(), user.getName(), user.getAvatarUrl(), user.getToken(), user.getGmtModified());
+            UserExample userExample1 = new UserExample();
+            userExample1.createCriteria().andAccountIdEqualTo(Integer.valueOf(gitHubUser.getId()));
+            userMapper.updateByExampleSelective(user, userExample1);
         }
         return user;
     }

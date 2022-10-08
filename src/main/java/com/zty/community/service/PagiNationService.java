@@ -4,7 +4,7 @@ import com.zty.community.dto.PageInfoDTO;
 import com.zty.community.dto.PaginationDTO;
 import com.zty.community.dto.QuestionDTO;
 import com.zty.community.mapper.QuestionMapper;
-import org.omg.CORBA.INTERNAL;
+import com.zty.community.model.QuestionExample;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,10 +76,14 @@ public class PagiNationService {
 
         //按照条件获取问题总数量
         if(Objects.equals(userId, -1)){
-            totalQuestionNum = questionMapper.countAll();
+            QuestionExample questionExample = new QuestionExample();
+            questionExample.createCriteria().andIdIsNotNull();
+            totalQuestionNum = (int)questionMapper.countByExample(questionExample);
         }else{
             //按照用户ID获取问题数量
-            totalQuestionNum = questionMapper.countQuestionByUserId(userId);
+            QuestionExample questionExample = new QuestionExample();
+            questionExample.createCriteria().andCreatorEqualTo(userId);
+            totalQuestionNum = (int)questionMapper.countByExample(questionExample);
         }
         //若page参数和size参数不合法，将其合法化，再按照页码查询问题
         Integer pageNums = (totalQuestionNum + size - 1) / size;
