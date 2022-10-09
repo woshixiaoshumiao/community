@@ -9,15 +9,25 @@ package com.zty.community.exception;
  * @Version: 1.0
  */
 public enum CustomizeErrorCode implements ICustomizeErrorCode{
-    QUESTION_NOTFOUND("你找的问题找不到了，要不要换个试试！");
+    QUESTION_NOT_FOUND(2001,"你找的问题找不到了，要不要换个试试！"),
+    TARGET_PARAM_NOT_FOUND(2002,"未选中任何问题，要不要换个试试！"),
+    NO_LOGIN(2003, "未登录，请先登录"),
+    SYS_ERROR(2004, "系统冒烟了，请稍后再试~");
     private String message;
+    private Integer code;
 
-    CustomizeErrorCode(String message) {
+    CustomizeErrorCode(Integer code, String message) {
         this.message = message;
+        this.code = code;
     }
 
     @Override
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public Integer getCode() {
+        return code;
     }
 }

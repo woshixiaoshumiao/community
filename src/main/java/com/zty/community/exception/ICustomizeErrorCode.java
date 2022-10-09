@@ -10,4 +10,5 @@ package com.zty.community.exception;
  */
 public interface ICustomizeErrorCode {
     String getMessage();
+    Integer getCode();
 }

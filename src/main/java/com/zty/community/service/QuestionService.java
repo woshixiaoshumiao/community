@@ -94,7 +94,7 @@ public class QuestionService {
     public QuestionDTO getQuestionDetailById(Long id){
         Question question = questionMapper.selectByPrimaryKey(id);
         if(question == null){
-            throw new  CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
+            throw new  CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
         UserExample userExample = new UserExample();
         userExample.createCriteria().andAccountIdEqualTo(question.getCreator());
@@ -119,13 +119,13 @@ public class QuestionService {
             //执行问题插入
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.insert(question);
+            questionMapper.insertSelective(question);
         }else{
             //执行问题更新
             question.setGmtModified(System.currentTimeMillis());
             int result = questionMapper.updateByPrimaryKeySelective(question);
             if(result != 1){
-                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
     }

@@ -1,5 +1,8 @@
 package com.zty.community.dto;
 
+import com.zty.community.exception.CustomizeErrorCode;
+import com.zty.community.exception.CustomizeException;
+
 /**
  * @BelongsProject: community
  * @BelongsPackage: com.zty.community.dto
@@ -17,5 +20,17 @@ public class ResultDTO {
         resultDTO.code = code;
         resultDTO.message = message;
         return resultDTO;
+    }
+
+    public static ResultDTO errorOf(CustomizeErrorCode noLogin) {
+        return errorOf(noLogin.getCode(), noLogin.getMessage());
+    }
+
+    public static ResultDTO okOf(){
+        return errorOf(200, "请求成功");
+    }
+
+    public static ResultDTO errorOf(CustomizeException ex) {
+        return errorOf(ex.getCode(), ex.getMessage());
     }
 }
