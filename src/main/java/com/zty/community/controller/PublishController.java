@@ -35,7 +35,7 @@ public class PublishController {
         return "publish";
     }
     @GetMapping("/publish/{questionId}")
-    public String edit(@PathVariable("questionId") Integer id,
+    public String edit(@PathVariable("questionId") Long id,
                        Model model){
         QuestionDTO questionDTO = questionService.getQuestionDetailById(id);
         model.addAttribute("title", questionDTO.getTitle());
@@ -50,7 +50,7 @@ public class PublishController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("tag") String tag,
-            @RequestParam(name = "questionId", required = false) Integer questionId,
+            @RequestParam(name = "questionId", required = false) Long questionId,
             HttpSession session,
             Model model
     ) {
@@ -80,7 +80,7 @@ public class PublishController {
             question.setTitle(title);
             question.setDescription(description);
             question.setTag(tag);
-            question.setCreator(user.getId());
+            question.setCreator(user.getAccountId());
             question.setId(questionId);
             questionService.createOrUpdate(question);
         }

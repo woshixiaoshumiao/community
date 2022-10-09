@@ -64,7 +64,7 @@ public class QuestionService {
         return questionDTOList;
     }
 
-    public List<QuestionDTO> listByUserId(Integer userId, Integer page, Integer size) {
+    public List<QuestionDTO> listByUserId(Long userId, Integer page, Integer size) {
         Integer offset = size * (page - 1);
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreatorEqualTo(userId);
@@ -91,7 +91,7 @@ public class QuestionService {
 
         return questionDTOList;
     }
-    public QuestionDTO getQuestionDetailById(Integer id){
+    public QuestionDTO getQuestionDetailById(Long id){
         Question question = questionMapper.selectByPrimaryKey(id);
         if(question == null){
             throw new  CustomizeException(CustomizeErrorCode.QUESTION_NOTFOUND);
@@ -130,7 +130,7 @@ public class QuestionService {
         }
     }
 
-    public void incView(Integer id) {
+    public void incView(Long id) {
         Question question = new Question();
         question.setId(id);
         question.setViewCount(1);

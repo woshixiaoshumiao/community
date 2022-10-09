@@ -24,13 +24,12 @@ public class UserService {
     UserMapper userMapper;
     public User createOrUpdateUser(GitHubUserDTO gitHubUser, User user){
 
-        user.setAccountId(Integer.valueOf(gitHubUser.getId()));
+        user.setAccountId(Long.valueOf(gitHubUser.getId()));
         user.setName(gitHubUser.getName());
         user.setAvatarUrl(gitHubUser.getAvatarUrl());
         user.setGmtModified(System.currentTimeMillis());
         UserExample userExample = new UserExample();
-        Integer accountId = Integer.valueOf(gitHubUser.getId());
-        userExample.createCriteria().andAccountIdEqualTo(accountId);
+        userExample.createCriteria().andAccountIdEqualTo(user.getAccountId());
         List<User> users = userMapper.selectByExample(userExample);
         if(users.isEmpty()){
             //无该用户,进行用户插入操作
@@ -40,7 +39,7 @@ public class UserService {
         }else{
             //有该用户，只需要更新该用户信息
             UserExample userExample1 = new UserExample();
-            userExample1.createCriteria().andAccountIdEqualTo(Integer.valueOf(gitHubUser.getId()));
+            userExample1.createCriteria().andAccountIdEqualTo(user.getAccountId());
             userMapper.updateByExampleSelective(user, userExample1);
         }
         return user;

@@ -69,13 +69,13 @@ public class PagiNationService {
         return  pageInfoDTO;
     }
 
-    public PaginationDTO getPaginationDTO(Integer userId ,Integer page, Integer size) {
+    public PaginationDTO getPaginationDTO(Long userId ,Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalQuestionNum;
         List<QuestionDTO> questions;
-
+        Long temp = -1L;
         //按照条件获取问题总数量
-        if(Objects.equals(userId, -1)){
+        if(temp.equals(userId)){
             QuestionExample questionExample = new QuestionExample();
             questionExample.createCriteria().andIdIsNotNull();
             totalQuestionNum = (int)questionMapper.countByExample(questionExample);
@@ -100,7 +100,7 @@ public class PagiNationService {
             size = 5;
         }
 
-        if(userId.equals(-1)){
+        if(temp.equals(userId)){
             questions = questionService.list(page, size);
         }else{
             //按照用户ID获取问题数量

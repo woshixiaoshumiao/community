@@ -1,6 +1,7 @@
 package com.zty.community.mapper;
 
 import com.zty.community.model.Question;
+import org.springframework.stereotype.Repository;
 
 /**
  * @BelongsProject: community
@@ -10,6 +11,7 @@ import com.zty.community.model.Question;
  * @Description: TODO
  * @Version: 1.0
  */
+@Repository
 public interface QuestionExtMapper {
     int incView(Question question);
 }

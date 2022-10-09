@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @BelongsProject: community
@@ -23,7 +22,7 @@ public class QuestionController {
     QuestionService questionService;
 
     @GetMapping("/question/{questionId}")
-    public String viewQuestion(@PathVariable(name = "questionId") Integer id,
+    public String viewQuestion(@PathVariable(name = "questionId") Long id,
                                Model model){
         QuestionDTO questionDTO = questionService.getQuestionDetailById(id);
         model.addAttribute("questionDetail", questionDTO);

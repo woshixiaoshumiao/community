@@ -28,7 +28,7 @@ public class IndexController {
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
                         @RequestParam(name = "size", defaultValue = "5") Integer size){
 
-        PaginationDTO paginationDTO = pagiNationService.getPaginationDTO(-1, page, size);
+        PaginationDTO paginationDTO = pagiNationService.getPaginationDTO(-1L, page, size);
         model.addAttribute("paginationDTO", paginationDTO);
         return "index";
     }
