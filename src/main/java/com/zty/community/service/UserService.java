@@ -21,7 +21,7 @@ import java.util.List;
 
 public class UserService {
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
     public User createOrUpdateUser(GitHubUserDTO gitHubUser, User user){
 
         user.setAccountId(Long.valueOf(gitHubUser.getId()));

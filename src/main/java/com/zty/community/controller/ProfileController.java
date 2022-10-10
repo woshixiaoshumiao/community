@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ProfileController {
     @Autowired
-    PagiNationService pagiNationService;
+    private PagiNationService pagiNationService;
 
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action,

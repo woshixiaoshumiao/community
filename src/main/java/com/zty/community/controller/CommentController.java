@@ -1,25 +1,19 @@
 package com.zty.community.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.zty.community.dto.CommentDTO;
 import com.zty.community.dto.ResultDTO;
 import com.zty.community.exception.CustomizeErrorCode;
-import com.zty.community.mapper.CommentMapper;
 import com.zty.community.model.Comment;
 import com.zty.community.model.User;
 import com.zty.community.service.CommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 
 /**
  * @BelongsProject: community
@@ -43,6 +37,7 @@ public class CommentController {
         if(user == null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
+
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentDTO, comment);
         comment.setCommentator(user.getAccountId());

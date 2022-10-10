@@ -42,7 +42,8 @@ public class CustomizeExceptionHandler {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
                 PrintWriter writer = response.getWriter();
-                writer.write(JSON.toJSONString(resultDTO));
+                String jsonString = JSON.toJSONString(resultDTO);
+                writer.write(jsonString);
                 writer.close();
             }catch (IOException ioException){
 

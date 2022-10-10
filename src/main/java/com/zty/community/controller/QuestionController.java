@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class QuestionController {
     @Autowired
-    QuestionService questionService;
+    private QuestionService questionService;
 
     @GetMapping("/question/{questionId}")
     public String viewQuestion(@PathVariable(name = "questionId") Long id,

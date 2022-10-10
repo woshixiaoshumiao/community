@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentService {
     @Autowired
-    CommentMapper commentMapper;
+    private CommentMapper commentMapper;
     @Autowired
-    QuestionMapper questionMapper;
+    private QuestionMapper questionMapper;
 
     public void insert(Comment comment) {
+        if(comment.getParentId() == null || comment.getParentId() == 0){
+
+        }
         commentMapper.insertSelective(comment);
     }
 }

@@ -22,9 +22,9 @@ import java.util.*;
 @Service
 public class PagiNationService {
     @Autowired
-    QuestionMapper questionMapper;
+    private QuestionMapper questionMapper;
     @Autowired
-    QuestionService questionService;
+    private QuestionService questionService;
 
     public PageInfoDTO getPageInfo(Integer page, Integer size, Integer totalQuestionNum) {
         PageInfoDTO pageInfoDTO = new PageInfoDTO();

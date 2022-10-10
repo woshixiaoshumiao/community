@@ -26,9 +26,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class PublishController {
     @Autowired
-    QuestionMapper questionMapper;
+    private QuestionMapper questionMapper;
     @Autowired
-    QuestionService questionService;
+    private QuestionService questionService;
 
     @GetMapping("/publish")
     public String publish(){

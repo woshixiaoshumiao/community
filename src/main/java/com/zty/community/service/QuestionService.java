@@ -30,11 +30,11 @@ import java.util.Objects;
 @Service
 public class QuestionService {
     @Autowired
-    QuestionMapper questionMapper;
+    private QuestionMapper questionMapper;
     @Autowired
-    QuestionExtMapper questionExtMapper;
+    private QuestionExtMapper questionExtMapper;
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     public List<QuestionDTO> list(Integer page, Integer size) {
         Integer offset = size * (page - 1);

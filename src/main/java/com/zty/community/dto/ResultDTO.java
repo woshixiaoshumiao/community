@@ -2,6 +2,7 @@ package com.zty.community.dto;
 
 import com.zty.community.exception.CustomizeErrorCode;
 import com.zty.community.exception.CustomizeException;
+import lombok.Data;
 
 /**
  * @BelongsProject: community
@@ -11,6 +12,7 @@ import com.zty.community.exception.CustomizeException;
  * @Description: TODO
  * @Version: 1.0
  */
+@Data
 public class ResultDTO {
     private Integer code;
     private String message;

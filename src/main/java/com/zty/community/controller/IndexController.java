@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class IndexController {
     @Autowired
-    PagiNationService pagiNationService;
+    private PagiNationService pagiNationService;
 
     @GetMapping("/")
     public String index(Model model,
