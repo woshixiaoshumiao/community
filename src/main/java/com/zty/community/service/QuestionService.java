@@ -136,4 +136,11 @@ public class QuestionService {
         question.setViewCount(1);
         questionExtMapper.incView(question);
     }
+
+    public void incComment(Long id){
+        Question question = new Question();
+        question.setId(id);
+        question.setCommentCount(1);
+        questionExtMapper.incComment(question);
+    }
 }
