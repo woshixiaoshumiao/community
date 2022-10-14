@@ -1,6 +1,6 @@
 package com.zty.community.controller;
 
-import com.zty.community.dto.CommentDTO;
+import com.zty.community.dto.CommentPostDTO;
 import com.zty.community.dto.ResultDTO;
 import com.zty.community.exception.CustomizeErrorCode;
 import com.zty.community.model.Comment;
@@ -29,7 +29,7 @@ public class CommentController {
     CommentService commentService;
     @PostMapping("/comment")
     @ResponseBody
-    public Object post(@RequestBody CommentDTO commentDTO, HttpServletRequest request){
+    public Object post(@RequestBody CommentPostDTO commentPostDTO, HttpServletRequest request){
         if(request == null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
@@ -39,7 +39,7 @@ public class CommentController {
         }
 
         Comment comment = new Comment();
-        BeanUtils.copyProperties(commentDTO, comment);
+        BeanUtils.copyProperties(commentPostDTO, comment);
         comment.setCommentator(user.getAccountId());
 //        comment.setCommentator(1L);
         comment.setGmtCreate(System.currentTimeMillis());

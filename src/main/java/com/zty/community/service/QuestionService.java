@@ -1,23 +1,22 @@
 package com.zty.community.service;
 
+import com.zty.community.dto.CommentDTO;
 import com.zty.community.dto.QuestionDTO;
+import com.zty.community.enums.CommentTypeEnum;
 import com.zty.community.exception.CustomizeErrorCode;
 import com.zty.community.exception.CustomizeException;
+import com.zty.community.mapper.CommentMapper;
 import com.zty.community.mapper.QuestionExtMapper;
 import com.zty.community.mapper.QuestionMapper;
 import com.zty.community.mapper.UserMapper;
-import com.zty.community.model.Question;
-import com.zty.community.model.QuestionExample;
-import com.zty.community.model.User;
-import com.zty.community.model.UserExample;
+import com.zty.community.model.*;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @BelongsProject: community
@@ -35,6 +34,8 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommentMapper commentMapper;
 
     public List<QuestionDTO> list(Integer page, Integer size) {
         Integer offset = size * (page - 1);

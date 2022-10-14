@@ -30,6 +30,21 @@ body {
     height: 38px;
 }
 
+.menu {
+    margin-top: 8px;
+    color: #999;
+}
+
+.menu .icon {
+    margin-left: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .icon:hover{
+    color: #499ef3;
+}
+
 .text-modify {
     font-size: 12px;
     font-weight: normal;
